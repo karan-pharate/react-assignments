@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import TodoList from "./TodoList";
 
-class App extends Component {
+class Page extends Component {
   state = {};
   render() {
     return (
@@ -13,4 +13,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Page;
