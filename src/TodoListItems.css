@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.delete-btn {
+  color: antiquewhite;
+  background-color: rgb(207, 42, 42);
+  border: none;
+  border-radius: 5px;
+  flex: 1;
+  margin: auto 10px;
+  padding: 6px 0;
+}
+.task {
+  font-size: 30px;
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+}
+
+.done {
+  text-decoration-line: line-through;
+}
+.textContent {
+  flex: 8;
+  width: 100px;
+  word-wrap: break-word;
+  font-weight: bold;
+}
+.checkbox {
+  transform: scale(1.1);
+  flex: 1;
+  margin: auto 0;
+}
