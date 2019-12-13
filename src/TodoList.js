@@ -74,16 +74,16 @@ class TodoList extends Component {
                 placeholder="enter task "
                 required
               ></input>
-              <div className="picker-button">
+              <div className="picker-button inputField">
                 <SketchExample
                   background={this.state.background}
                   changeComplete={this.handleChangeComplete}
                 />
               </div>
-              <button type="submit" className="add-button">
-                +
-              </button>
             </div>
+            <button type="submit" className="add-button">
+              +
+            </button>
           </form>
         </div>
         <TodoListItems
