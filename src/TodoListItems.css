@@ -14,7 +14,6 @@
 }
 .task {
   font-size: 30px;
-  width: 300px;
   display: flex;
   flex-direction: row;
 }

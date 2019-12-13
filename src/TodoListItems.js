@@ -10,9 +10,12 @@ class TodoListItems extends Component {
   }
   createTasks(item) {
     let classname = item.done === true ? "textContent done" : "textContent";
-    console.log(item.done);
+    console.log(item);
+    const bgcolor = {
+      background: `${item.background}`
+    };
     return (
-      <li className="task" key={item.key}>
+      <li className="task" key={item.key} style={bgcolor}>
         <input
           className="checkbox"
           onChange={() => this.completed(item.key)}
@@ -35,6 +38,7 @@ class TodoListItems extends Component {
   render() {
     var todoEntries = this.props.entries;
     var listItems = todoEntries.map(this.createTasks);
+
     return (
       <div>
         <ul className="theList">{listItems}</ul>

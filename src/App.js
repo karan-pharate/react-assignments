@@ -6,7 +6,7 @@ class Page extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div className="parent-container">
         <TodoList />
       </div>
     );

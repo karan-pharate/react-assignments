@@ -1,23 +1,27 @@
 import React, { Component } from "react";
 import TodoListItems from "./TodoListItems";
 import "./Todolist.css";
+import SketchExample from "./SketchExample";
 
 class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      background: "#fff"
     };
     this.addItem = this.addItem.bind(this);
     this.markCompleted = this.markCompleted.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    this.handleChangeComplete = this.handleChangeComplete.bind(this);
   }
   addItem(e) {
     if (this.inputElement.value !== "") {
       var newItem = {
         text: this.inputElement.value,
         key: Date.now(),
-        done: false
+        done: false,
+        background: this.state.background
       };
     }
     this.setState(prevState => {
@@ -31,7 +35,7 @@ class TodoList extends Component {
   }
   markCompleted(key) {
     console.log(this.state.items);
-    console.log("item" + key);
+    console.log(this);
     let markedItems = this.state.items.map(function(item) {
       if (key === item.key) {
         item.done = !item.done;
@@ -52,6 +56,12 @@ class TodoList extends Component {
       items: filteredItems
     });
   }
+  handleChangeComplete(color) {
+    this.setState({
+      background: color.hex
+    });
+    console.log(color.hex);
+  }
   render() {
     return (
       <div className="todoListMain">
@@ -61,10 +71,16 @@ class TodoList extends Component {
             <div className="inputField">
               <input
                 ref={a => (this.inputElement = a)}
-                placeholder="enter task"
+                placeholder="enter task "
                 required
               ></input>
-              <button type="submit">+</button>
+              <SketchExample
+                background={this.state.background}
+                changeComplete={this.handleChangeComplete}
+              />
+              <button type="submit" className="add-button">
+                +
+              </button>
             </div>
           </form>
         </div>
