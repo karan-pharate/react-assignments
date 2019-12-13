@@ -58,3 +58,9 @@ ul.theList {
 .inputField {
   margin: 0 auto;
 }
+.picker-button {
+  display: inline;
+  position: absolute;
+  top: 120px;
+  left: 690px;
+}
