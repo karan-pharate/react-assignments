@@ -35,7 +35,7 @@ class TodoList extends Component {
     this.inputElement.value = "";
   };
   markCompleted = key => {
-    let markedItems = this.state.items.map(function(item) {
+    let markedItems = this.state.items.map(item => {
       if (key === item.key) {
         item.done = !item.done;
       }
