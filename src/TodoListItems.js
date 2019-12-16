@@ -2,15 +2,18 @@ import React, { Component } from "react";
 import "./App.css";
 import "./TodoListItems.css";
 
-class TodoListItems extends Component {
-  constructor(props) {
-    super(props);
+const TodoListItems = props => {
+  const todoEntries = props.entries;
 
-    this.createTasks = this.createTasks.bind(this);
-  }
-  createTasks(item) {
+  const deleteItems = key => {
+    props.deleteItems(key);
+  };
+  const completed = item => {
+    props.completed(item);
+  };
+
+  const createTasks = item => {
     let classname = item.done === true ? "textContent done" : "textContent";
-    console.log(item);
     const bgcolor = {
       background: `${item.background}`
     };
@@ -18,33 +21,24 @@ class TodoListItems extends Component {
       <li className="task" key={item.key} style={bgcolor}>
         <input
           className="checkbox"
-          onChange={() => this.completed(item.key)}
+          onChange={() => completed(item.key)}
           type="checkbox"
         ></input>
         <p className={classname}> {item.text}</p>
-
-        <button class="delete-btn" onClick={() => this.delete(item.key)}>
+        <button class="delete-btn" onClick={() => deleteItems(item.key)}>
           X
         </button>
       </li>
     );
-  }
-  delete(key) {
-    this.props.delete(key);
-  }
-  completed(item) {
-    this.props.completed(item);
-  }
-  render() {
-    var todoEntries = this.props.entries;
-    var listItems = todoEntries.map(this.createTasks);
+  };
 
-    return (
-      <div>
-        <ul className="theList">{listItems}</ul>
-      </div>
-    );
-  }
-}
+  const listItems = todoEntries.map(createTasks.bind(this));
+
+  return (
+    <div>
+      <ul className="theList">{listItems}</ul>
+    </div>
+  );
+};
 
 export default TodoListItems;

@@ -10,14 +10,17 @@ class TodoList extends Component {
       items: [],
       background: "#fff"
     };
+
     this.addItem = this.addItem.bind(this);
     this.markCompleted = this.markCompleted.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
     this.handleChangeComplete = this.handleChangeComplete.bind(this);
   }
-  addItem(e) {
+  addItem = e => {
+    e.preventDefault();
+    let newItem;
     if (this.inputElement.value !== "") {
-      var newItem = {
+      newItem = {
         text: this.inputElement.value,
         key: Date.now(),
         done: false,
@@ -30,24 +33,19 @@ class TodoList extends Component {
       };
     });
     this.inputElement.value = "";
-    console.log(this.state.items);
-    e.preventDefault();
-  }
-  markCompleted(key) {
-    console.log(this.state.items);
-    console.log(this);
+  };
+  markCompleted = key => {
     let markedItems = this.state.items.map(function(item) {
       if (key === item.key) {
         item.done = !item.done;
       }
-      console.log(item);
       return item;
     });
     this.setState({
       items: markedItems
     });
-  }
-  deleteItem(key) {
+  };
+  deleteItem = key => {
     let filteredItems = this.state.items.filter(function(item) {
       return item.key !== key;
     });
@@ -55,13 +53,12 @@ class TodoList extends Component {
     this.setState({
       items: filteredItems
     });
-  }
-  handleChangeComplete(color) {
+  };
+  handleChangeComplete = color => {
     this.setState({
       background: color.hex
     });
-    console.log(color.hex);
-  }
+  };
   render() {
     return (
       <div className="todoListMain">
@@ -89,7 +86,7 @@ class TodoList extends Component {
         <TodoListItems
           entries={this.state.items}
           completed={this.markCompleted}
-          delete={this.deleteItem}
+          deleteItems={this.deleteItem}
         />
       </div>
     );

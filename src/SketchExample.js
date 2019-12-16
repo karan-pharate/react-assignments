@@ -32,13 +32,13 @@ class SketchExample extends Component {
           onClick={this.handleChange}
           style={bgcolor}
         ></button>
-        {this.state.displayColorPicker ? (
+        {this.state.displayColorPicker && (
           <SketchPicker
             className="sketch-picker"
             color={this.state.background}
             onChangeComplete={this.handleChangeComplete}
           />
-        ) : null}
+        )}
       </div>
     );
   }
