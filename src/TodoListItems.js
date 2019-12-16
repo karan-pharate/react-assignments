@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import "./App.css";
 import "./TodoListItems.css";
 
@@ -25,7 +26,7 @@ const TodoListItems = props => {
           type="checkbox"
         ></input>
         <p className={classname}> {item.text}</p>
-        <button class="delete-btn" onClick={() => deleteItems(item.key)}>
+        <button className="delete-btn" onClick={() => deleteItems(item.key)}>
           X
         </button>
       </li>
@@ -39,6 +40,17 @@ const TodoListItems = props => {
       <ul className="theList">{listItems}</ul>
     </div>
   );
+};
+TodoListItems.propTypes = {
+  entries: PropTypes.array,
+  deleteItems: PropTypes.func,
+  completed: PropTypes.func
+};
+
+TodoListItems.defaultProps = {
+  entries: [],
+  deleteItems: () => {},
+  completed: () => {}
 };
 
 export default TodoListItems;

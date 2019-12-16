@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { SketchPicker } from "react-color";
 import "./SketchExample.css";
+import PropTypes from "prop-types";
 class SketchExample extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +11,7 @@ class SketchExample extends Component {
     };
   }
 
-  handleChange = color => {
+  handleChange = () => {
     this.setState({
       displayColorPicker: !this.state.displayColorPicker
     });
@@ -43,4 +44,15 @@ class SketchExample extends Component {
     );
   }
 }
+
+SketchExample.propTypes = {
+  background: PropTypes.string,
+  changeComplete: PropTypes.func
+};
+
+SketchExample.defaultProps = {
+  background: "",
+  changeComplete: () => {}
+};
+
 export default SketchExample;

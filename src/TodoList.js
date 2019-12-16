@@ -7,7 +7,9 @@ class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [],
+      items: [
+        { text: "test", key: Date.now(), done: false, background: "#f9f9f9" }
+      ],
       background: "#fff"
     };
 
