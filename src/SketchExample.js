@@ -4,17 +4,14 @@ import "./SketchExample.css";
 import PropTypes from "prop-types";
 
 const SketchExample = props => {
-  const [colorData, setData] = useState({
-    displayColorPicker: false
-  });
+  const [showPicker, setPickerState] = useState(false);
 
   const bgcolor = {
     background: `${props.background}`
   };
+
   const handleChange = () => {
-    setData({
-      displayColorPicker: !colorData.displayColorPicker
-    });
+    setPickerState(!showPicker);
   };
 
   const handleChangeComplete = color => {
@@ -29,7 +26,7 @@ const SketchExample = props => {
         onClick={handleChange}
         style={bgcolor}
       ></button>
-      {colorData.displayColorPicker && (
+      {showPicker && (
         <SketchPicker
           className="sketch-picker"
           color={props.background}
@@ -49,4 +46,5 @@ SketchExample.defaultProps = {
   background: "",
   changeComplete: () => {}
 };
+
 export default SketchExample;

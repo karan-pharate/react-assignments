@@ -4,17 +4,8 @@ import "./Todolist.css";
 import SketchExample from "./SketchExample";
 
 const TodoList = () => {
-  const todoItem = [
-    {
-      text: "test",
-      key: Date.now(),
-      done: false,
-      background: "#f9f9f9"
-    }
-  ];
-
   const [bgColor, setColor] = useState("");
-  const [item, setData] = useState(todoItem);
+  const [item, setData] = useState([]);
   const inputElement = useRef();
 
   const addItem = e => {
@@ -23,7 +14,6 @@ const TodoList = () => {
     if (inputElement.current.value !== "") {
       newItem = {
         text: inputElement.current.value,
-        key: Date.now(),
         done: false,
         background: bgColor
       };
@@ -31,21 +21,23 @@ const TodoList = () => {
     setData([...item, newItem]);
     inputElement.current.value = "";
   };
+
   const markCompleted = key => {
-    item.map(item => {
-      if (key === item.key) {
+    item.map((item, index) => {
+      if (key === index) {
         item.done = !item.done;
       }
     });
     setData([...item]);
   };
-  const deleteItem = key => {
-    const filteredItems = item.filter(item => {
-      return item.key !== key;
-    });
 
+  const deleteItem = key => {
+    const filteredItems = item.filter((item, index) => {
+      return index !== key;
+    });
     setData(filteredItems);
   };
+
   const handleChangeComplete = color => {
     setColor(color.hex);
   };
@@ -56,7 +48,7 @@ const TodoList = () => {
       <div className="header">
         <form onSubmit={addItem}>
           <div className="inputField">
-            <input ref={inputElement} placeholder="enter task" required></input>
+            <input ref={inputElement} placeholder="enter task" required />
             <div className="picker-button inputField">
               <SketchExample
                 background={bgColor}

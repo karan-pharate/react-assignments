@@ -8,22 +8,23 @@ const TodoListItems = props => {
   return (
     <div>
       <ul className="theList">
-        {props.entries.map(item => {
-          const classname = `textContent ${item.done === true && "done"}`;
+        {props.entries.map((item, key) => {
           const bgcolor = {
             background: `${item.background}`
           };
           return (
-            <li className="task" key={item.key} style={bgcolor}>
+            <li className="task" key={key} style={bgcolor}>
               <input
                 className="checkbox"
-                onChange={() => props.completed(item.key)}
+                onChange={() => props.completed(key)}
                 type="checkbox"
-              ></input>
-              <p className={classname}> {item.text}</p>
+              />
+              <p className={`textContent ${item.done === true && "done"}`}>
+                {item.text}
+              </p>
               <button
                 className="delete-btn"
-                onClick={() => props.deleteItems(item.key)}
+                onClick={() => props.deleteItems(key)}
               >
                 X
               </button>
@@ -34,6 +35,7 @@ const TodoListItems = props => {
     </div>
   );
 };
+
 TodoListItems.propTypes = {
   entries: PropTypes.array,
   deleteItems: PropTypes.func,
