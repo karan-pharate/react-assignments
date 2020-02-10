@@ -1,97 +1,82 @@
-import React, { Component } from "react";
+import React, { useState, useRef } from "react";
 import TodoListItems from "./TodoListItems";
 import "./Todolist.css";
 import SketchExample from "./SketchExample";
 
-class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: [
-        { text: "test", key: Date.now(), done: false, background: "#f9f9f9" }
-      ],
-      background: "#fff"
-    };
+const TodoList = () => {
+  const todoItem = [
+    {
+      text: "test",
+      key: Date.now(),
+      done: false,
+      background: "#f9f9f9"
+    }
+  ];
 
-    this.addItem = this.addItem.bind(this);
-    this.markCompleted = this.markCompleted.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
-    this.handleChangeComplete = this.handleChangeComplete.bind(this);
-  }
-  addItem = e => {
+  const [bgColor, setColor] = useState("");
+  const [item, setData] = useState(todoItem);
+  const inputElement = useRef();
+
+  const addItem = e => {
     e.preventDefault();
     let newItem;
-    if (this.inputElement.value !== "") {
+    if (inputElement.current.value !== "") {
       newItem = {
-        text: this.inputElement.value,
+        text: inputElement.current.value,
         key: Date.now(),
         done: false,
-        background: this.state.background
+        background: bgColor
       };
     }
-    this.setState(prevState => {
-      return {
-        items: prevState.items.concat(newItem)
-      };
-    });
-    this.inputElement.value = "";
+    setData([...item, newItem]);
+    inputElement.current.value = "";
   };
-  markCompleted = key => {
-    let markedItems = this.state.items.map(item => {
+  const markCompleted = key => {
+    item.map(item => {
       if (key === item.key) {
         item.done = !item.done;
       }
       return item;
     });
-    this.setState({
-      items: markedItems
-    });
+    setData([...item]);
   };
-  deleteItem = key => {
-    let filteredItems = this.state.items.filter(function(item) {
+  const deleteItem = key => {
+    const filteredItems = item.filter(item => {
       return item.key !== key;
     });
 
-    this.setState({
-      items: filteredItems
-    });
+    setData(filteredItems);
   };
-  handleChangeComplete = color => {
-    this.setState({
-      background: color.hex
-    });
+  const handleChangeComplete = color => {
+    setColor(color.hex);
   };
-  render() {
-    return (
-      <div className="todoListMain">
-        <h1>To do List</h1>
-        <div className="header">
-          <form onSubmit={this.addItem}>
-            <div className="inputField">
-              <input
-                ref={a => (this.inputElement = a)}
-                placeholder="enter task "
-                required
-              ></input>
-              <div className="picker-button inputField">
-                <SketchExample
-                  background={this.state.background}
-                  changeComplete={this.handleChangeComplete}
-                />
-              </div>
+
+  return (
+    <div className="todoListMain">
+      <h1>To do List</h1>
+      <div className="header">
+        <form onSubmit={addItem}>
+          <div className="inputField">
+            <input ref={inputElement} placeholder="enter task" required></input>
+            <div className="picker-button inputField">
+              <SketchExample
+                background={bgColor}
+                changeComplete={handleChangeComplete}
+              />
             </div>
             <button type="submit" className="add-button">
               +
             </button>
-          </form>
-        </div>
-        <TodoListItems
-          entries={this.state.items}
-          completed={this.markCompleted}
-          deleteItems={this.deleteItem}
-        />
+          </div>
+        </form>
       </div>
-    );
-  }
-}
+      <TodoListItems
+        entries={item}
+        completed={markCompleted}
+        deleteItems={deleteItem}
+      />
+    </div>
+  );
+};
+
 export default TodoList;
