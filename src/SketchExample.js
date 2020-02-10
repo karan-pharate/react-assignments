@@ -4,12 +4,8 @@ import "./SketchExample.css";
 import PropTypes from "prop-types";
 
 const SketchExample = props => {
-  let colorItem = {
-    displayColorPicker: false
-  };
-
   const [colorData, setData] = useState({
-    colorItem
+    displayColorPicker: false
   });
 
   const bgcolor = {

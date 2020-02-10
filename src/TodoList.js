@@ -36,7 +36,6 @@ const TodoList = () => {
       if (key === item.key) {
         item.done = !item.done;
       }
-      return item;
     });
     setData([...item]);
   };

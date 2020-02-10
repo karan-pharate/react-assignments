@@ -4,22 +4,12 @@ import "./App.css";
 import "./TodoListItems.css";
 
 const TodoListItems = props => {
-  useEffect(() => {
-    console.log(props.entries);
-  }, [props.entries]);
-
-  const deleteItems = key => {
-    props.deleteItems(key);
-  };
-  const completed = item => {
-    props.completed(item);
-  };
+  useEffect(() => {}, [props.entries]);
   return (
     <div>
       <ul className="theList">
         {props.entries.map(item => {
-          let classname =
-            item.done === true ? "textContent done" : "textContent";
+          const classname = `textContent ${item.done === true && "done"}`;
           const bgcolor = {
             background: `${item.background}`
           };
@@ -27,13 +17,13 @@ const TodoListItems = props => {
             <li className="task" key={item.key} style={bgcolor}>
               <input
                 className="checkbox"
-                onChange={() => completed(item.key)}
+                onChange={() => props.completed(item.key)}
                 type="checkbox"
               ></input>
               <p className={classname}> {item.text}</p>
               <button
                 className="delete-btn"
-                onClick={() => deleteItems(item.key)}
+                onClick={() => props.deleteItems(item.key)}
               >
                 X
               </button>
