@@ -54,6 +54,8 @@ div {
 
 ul.theList {
   padding: 0px;
+  max-height: 750px;
+  overflow-y: scroll;
 }
 .inputField {
   display: inline;
