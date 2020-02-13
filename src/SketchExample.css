@@ -1,0 +1,14 @@
+.color-picker {
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0 0 0 10px;
+  border: 1px solid #f9f9f9;
+}
+.sketch-picker {
+  position: fixed;
+  top: 150px;
+  right: 500px;
+}
+.color-picker-container {
+  display: inline;
+}
